@@ -1,0 +1,20 @@
+{
+  "name": "film-track-assignment",
+  "description": "",
+  "main": "index.html",
+  "authors": [
+    "DeMion Claiborne"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^1.7.0"
+  }
+}
