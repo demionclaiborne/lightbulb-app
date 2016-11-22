@@ -1,0 +1,45 @@
+<link rel="import" href="bower_components/polymer/polymer.html"/>
+<link rel="import" href="bower_components/iron-input/iron-input.html"/>
+<script src="room.js"></script>
+
+<dom-module id="lightbulb-app">
+    <template>
+        <span>Number of lights: </span>
+        <input is="iron-input" bind-value="{{numberOfLights}}"/>
+        <span> Number of users: </span>
+        <input is="iron-input" bind-value="{{numberOfUsers}}"/>
+        <br/><br/>
+        <span>Lights turned on:</span>
+        <template is="dom-repeat" items="{{lightsOn}}">
+            <p>{{item.position}}</p>
+        </template>
+    </template>
+    <script>
+        Polymer({
+            is: 'lightbulb-app',
+            properties: {
+                numberOfLights: {
+                    type: Number,
+                    value: 10
+                },
+                numberOfUsers: {
+                    type: Number,
+                    value: 2
+                },
+                lightsOn: {
+                    type: String,
+                    computed: 'getLightsTurnedOn(numberOfLights, numberOfUsers)'
+                }
+            },
+            getLightsTurnedOn: function(numLights, numUsers) {
+                var room  = new Room(numLights);
+
+                for (var i = 1; i <= numUsers; i++) {
+                    room.changeLightStateEveryMultipleOf(i);
+                }
+
+                return room.lights.filter(light => { return light.isOn; });
+            }
+        });
+    </script>
+</dom-module>
