@@ -11,9 +11,13 @@ function Room(numberOfLights) {
             light.isOn = !light.isOn;
         }
     }
-
-    for (var i = 1; i <= numberOfLights; i++) {
-        var light = new Light(i);
-        this.lights.push(light);
+    this.setNumberOfLights = function(count) {
+        this.lights = [];
+        for (var i = 1; i <= count; i++) {
+            var light = new Light(i);
+            this.lights.push(light);
+        }
     }
+
+    this.setNumberOfLights(numberOfLights);
 }
