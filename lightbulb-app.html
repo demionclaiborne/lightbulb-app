@@ -4,10 +4,15 @@
 <dom-module id="lightbulb-app">
     <template>
         <span>Number of lights: </span>
-        <input is="iron-input" bind-value="{{numberOfLights}}"/>
-        <span> Number of users: </span>
-        <input is="iron-input" bind-value="{{numberOfUsers}}"/>
-        <button on-tap="alterLights">Calculate</button>
+        <div class$="{{inputClass}}">
+            <input is="iron-input" bind-value="{{numberOfLights}}"/>
+        </div>
+        <br/>
+        <span>Number of users: </span>
+        <div class$="{{inputClass}}">
+            <input is="iron-input" bind-value="{{numberOfUsers}}"/>
+        </div>
+        <button class$={{buttonClass}} on-tap="alterLights">Calculate</button>
 
         <table class$="{{tableClass}}">
             <thead>
@@ -32,6 +37,8 @@
         Polymer({
             is: 'lightbulb-app',
             properties: {
+                buttonClass: String,
+                inputClass: String,
                 numberOfLights: {
                     type: Number,
                     value: 10
