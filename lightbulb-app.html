@@ -3,15 +3,24 @@
 
 <dom-module id="lightbulb-app">
     <template>
-        <span>Number of lights: </span>
-        <div class$="{{inputClass}}">
-            <input is="iron-input" bind-value="{{numberOfLights}}"/>
-        </div>
-        <br/>
-        <span>Number of users: </span>
-        <div class$="{{inputClass}}">
-            <input is="iron-input" bind-value="{{numberOfUsers}}"/>
-        </div>
+        <style>
+            .form.input {
+                width: 100px;
+                margin-bottom: 5px;
+            }
+        </style>
+        <form>
+            <span>Number of lights: </span>
+            <div class$="form input {{inputClass}}">
+                <input is="iron-input" bind-value="{{numberOfLights}}"/>
+            </div>
+            <br/>
+            <span>Number of users: </span>
+            <div class$="form input {{inputClass}}">
+                <input is="iron-input" bind-value="{{numberOfUsers}}"/>
+            </div>
+        </form>
+
         <button class$={{buttonClass}} on-tap="alterLights">Calculate</button>
 
         <table class$="{{tableClass}}">
