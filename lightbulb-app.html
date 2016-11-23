@@ -1,6 +1,5 @@
 <link rel="import" href="bower_components/polymer/polymer.html"/>
 <link rel="import" href="bower_components/iron-input/iron-input.html"/>
-<script src="room.js"></script>
 
 <dom-module id="lightbulb-app">
     <template>
@@ -8,12 +7,27 @@
         <input is="iron-input" bind-value="{{numberOfLights}}"/>
         <span> Number of users: </span>
         <input is="iron-input" bind-value="{{numberOfUsers}}"/>
-        <br/><br/>
-        <span>Lights turned on:</span>
-        <template is="dom-repeat" items="{{lightsOn}}">
-            <p>{{item.position}}</p>
-        </template>
+        <button on-tap="alterLights">Calculate</button>
+
+        <table class$="{{tableClass}}">
+            <thead>
+                <tr><th>Light #</th>
+                <th>IsOn</th>
+            </tr></thead>
+            <tbody>
+                <template is="dom-repeat" items="{{room.lights}}">
+                    <tr>
+                    <td>{{item.position}}</td>
+                    <td>{{item.isOn}}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
     </template>
+    <!--tablesort-->
+    <script src="tablesort.js"></script>
+    <!--my scripts-->
+    <script src="room.js"></script>
     <script>
         Polymer({
             is: 'lightbulb-app',
@@ -26,19 +40,25 @@
                     type: Number,
                     value: 2
                 },
-                lightsOn: {
-                    type: String,
-                    computed: 'getLightsTurnedOn(numberOfLights, numberOfUsers)'
-                }
+                room: {
+                    type: Object,
+                    value: function () {
+                        return new Room();
+                    }
+                },
+                tableClass: String
             },
-            getLightsTurnedOn: function(numLights, numUsers) {
-                var room  = new Room(numLights);
+            ready: function() {
+                $("table").tablesort();
+            },
+            alterLights: function() {
+                var room = new Room(this.numberOfLights);
 
-                for (var i = 1; i <= numUsers; i++) {
+                for (var i = 1; i <= this.numberOfUsers; i++) {
                     room.changeLightStateEveryMultipleOf(i);
                 }
 
-                return room.lights.filter(light => { return light.isOn; });
+                this.set('room.lights', room.lights);
             }
         });
     </script>
