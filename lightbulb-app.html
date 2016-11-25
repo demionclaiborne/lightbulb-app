@@ -1,5 +1,6 @@
 <link rel="import" href="bower_components/polymer/polymer.html" />
 <link rel="import" href="bower_components/iron-input/iron-input.html" />
+<link rel="import" href="bower_components/iron-pages/iron-pages.html" />
 
 <dom-module id="lightbulb-app">
     <template>
@@ -8,60 +9,77 @@
                 width: 100px;
                 margin-bottom: 5px;
             }
+            
             div#results {
                 text-align: right;
             }
+            
             div#results > span:nth-child(1) {
                 color: green;
             }
+            
             div#results > span:nth-child(3) {
                 color: red;
             }
-            button {
+            
+            div::nth-child(0) > button {
                 float: left;
             }
+            
             th {
                 width: 50%;
             }
         </style>
-        <form>
-            <span>Number of lights: </span>
-            <div class$="form input {{inputClass}}">
-                <input is="iron-input" bind-value="{{numberOfLights}}" />
-            </div>
-            <br/>
-            <span>Number of users: </span>
-            <div class$="form input {{inputClass}}">
-                <input is="iron-input" bind-value="{{numberOfUsers}}" />
-            </div>
-        </form>
+        <iron-pages selected={{selectedPage}}>
+            <div>
+                <form>
+                    <span>Number of lights: </span>
+                    <div class$="form input {{inputClass}}">
+                        <input is="iron-input" bind-value="{{numberOfLights}}" />
+                    </div>
+                    <br/>
+                    <span>Number of users: </span>
+                    <div class$="form input {{inputClass}}">
+                        <input is="iron-input" bind-value="{{numberOfUsers}}" />
+                    </div>
+                </form>
 
-        <button class$={{buttonClass}} on-tap="alterLights">Calculate</button>
+                <button class$={{buttonClass}} on-tap="alterLights">Calculate</button>
 
-        <div id="results">
-            <span>[[lightsOn(room.lights)]]</span> lights on
-            <br/>
-            <span>[[lightsOff(room.lights)]]</span> lights off
-        </div>
-        <table class$="{{tableClass}}">
-            <thead>
-                <tr>
-                    <th>Light #</th>
-                    <th>IsOn</th>
-                </tr>
-            </thead>
-            <tbody>
-                <template is="dom-repeat" items="{{room.lights}}">
-                    <tr>
-                        <td>{{item.position}}</td>
-                        <td>{{item.isOn}}</td>
-                    </tr>
-                </template>
-            </tbody>
-        </table>
+                <div id="results">
+                    <span>[[lightsOn(room.lights)]]</span> lights on
+                    <br/>
+                    <span>[[lightsOff(room.lights)]]</span> lights off
+                </div>
+                <br/>
+                <div>
+                    Lights on: [
+                    <template is="dom-repeat" items="{{room.lights}}">
+                        <span>{{item.position}}</span><span>, </span>
+                    </template>
+                    ]
+                </div>
+            </div>
+            <div>
+                <table class$="{{tableClass}}">
+                    <thead>
+                        <tr>
+                            <th>Light #</th>
+                            <th>IsOn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template is="dom-repeat" items="{{room.lights}}">
+                            <tr>
+                                <td>{{item.position}}</td>
+                                <td>{{item.isOn}}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </iron-pages>
     </template>
-    <!--tablesort-->
-    <script src="tablesort.js"></script>
     <!--my scripts-->
     <script src="room.js"></script>
     <script>
@@ -90,16 +108,19 @@
                         return new Room();
                     }
                 },
+                selectedPage: {
+                    type: Number,
+                    value: 0
+                },
                 tableClass: {
                     type: String,
-                    value: 'ui sortable celled table'
+                    value: 'ui celled table'
                 }
             },
             observers: [
                 'roomLightsChanged(room.lights)'
             ],
             ready: function() {
-                $("table").tablesort();
                 this.alterLights();
             },
             alterLights: function() {

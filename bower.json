@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "polymer": "^1.7.0",
-    "iron-input": "PolymerElements/iron-input#^1.0.10"
+    "iron-input": "PolymerElements/iron-input#^1.0.10",
+    "iron-pages": "PolymerElements/iron-pages#^1.0.8"
   }
 }
