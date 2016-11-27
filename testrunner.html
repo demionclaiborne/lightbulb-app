@@ -1,23 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Mocha Tests</title>
-    <link rel="stylesheet" href="node_modules/mocha/mocha.css">
-  </head>
-  <body>
-    <div id="mocha"></div>
-    <script src="node_modules/mocha/mocha.js"></script>
-    <script src="node_modules/chai/chai.js"></script>
-    <script>mocha.setup('tdd')</script>
 
-    <!-- load code you want to test here -->
-    <script src="room.js"></script>
+<head>
+  <title>Mocha Tests</title>
+  <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+  <!--jQuery-->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <!--Semantic UI-->
+  <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css" />
+  <script src="semantic/dist/semantic.min.js"></script>
 
-    <!-- load your test files here -->
-    <script src="test/test.js"></script>
+  <style type="text/css">
+    #mocha-stats {
+      position: relative;
+    }
+  </style>
+</head>
 
-    <script>
+<body>
+  <div class="ui fixed inverted menu">
+    <div class="ui container">
+      <a href="index.html" class="item">Home</a>
+      <a href="#" class="item">Tests</a>
+    </div>
+  </div>
+
+  <div id="mocha"></div>
+  <script src="node_modules/mocha/mocha.js"></script>
+  <script src="node_modules/chai/chai.js"></script>
+  <script>mocha.setup('tdd')</script>
+
+  <!-- load code you want to test here -->
+  <script src="room.js"></script>
+
+  <!-- load your test files here -->
+  <script src="test/test.js"></script>
+
+  <script>
       mocha.run();
     </script>
-  </body>
+</body>
+
 </html>
