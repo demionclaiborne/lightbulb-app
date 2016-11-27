@@ -8,7 +8,7 @@ bower install
 
 ## To run:
 
-Run the following command in the root of the project, then navigate to <localhost:8080/index.html>  
+Run the following command in the root of the project, then navigate to <http://localhost:8080/index.html>  
 ````
 npm start
 ````
