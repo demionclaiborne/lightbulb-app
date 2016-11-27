@@ -141,9 +141,6 @@
                 return roomLights.filter(function(item) {
                     return !item.isOn;
                 }).length;
-            },
-            roomLightsChanged: function(roomLights) {
-                this.fire('roomLightsChanged', {roomLights: roomLights});
             }
         });
     </script>
