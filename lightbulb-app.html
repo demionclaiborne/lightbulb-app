@@ -117,9 +117,6 @@
                     value: 'ui celled table'
                 }
             },
-            observers: [
-                'roomLightsChanged(room.lights)'
-            ],
             ready: function() {
                 this.alterLights();
             },
@@ -144,9 +141,6 @@
                 return roomLights.filter(function(item) {
                     return !item.isOn;
                 }).length;
-            },
-            roomLightsChanged: function(roomLights) {		
-                this.fire('roomLightsChanged', {roomLights: roomLights});
             }
         });
     </script>
