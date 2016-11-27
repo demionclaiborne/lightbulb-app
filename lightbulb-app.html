@@ -54,7 +54,7 @@
                 <br/>
                 <div>
                     Lights on: [
-                    <template is="dom-repeat" items="{{room.lights}}">
+                    <template is="dom-repeat" items="{{room.lights}}" filter="isLightOn">
                         <span>{{item.position}}</span><span>, </span>
                     </template>
                     ]
@@ -132,6 +132,9 @@
 
                 this.set('room.lights', room.lights);
             },
+            isLightOn: function(light) {
+                return light.isOn;
+            },
             lightsOn: function(roomLights) {
                 return roomLights.filter(function(item) {
                     return item.isOn;
@@ -141,6 +144,9 @@
                 return roomLights.filter(function(item) {
                     return !item.isOn;
                 }).length;
+            },
+            roomLightsChanged: function(roomLights) {		
+                this.fire('roomLightsChanged', {roomLights: roomLights});
             }
         });
     </script>
